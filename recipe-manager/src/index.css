@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .headerFamily{
-     font-family: 'Source Code Pro';
+     font-family: 'montserrat';
      font-weight: 'bold';
 }
  .customParagraph {

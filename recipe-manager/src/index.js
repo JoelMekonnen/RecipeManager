@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import Homepage from './Pages/Homepage';
 import About from './Pages/About';
 import Contact from './Pages/Contact';
+import RecipeDetail from './Pages/recipeDetail';
 import './index.css'
 import Login from './Pages/Login';
 import  { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -16,6 +17,7 @@ export default function RecipeManager() {
                      <Route path="/Login" element={<Login/>}/>
                      <Route path="/About" element={<About/>}/>
                      <Route path="/Contact" element={<Contact/>}/>
+                     <Route path='/recipeDetail' element={<RecipeDetail/>}/>
                   </Routes>
             </BrowserRouter>
        );
