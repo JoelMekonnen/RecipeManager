@@ -108,11 +108,11 @@ export default function TrendingSection() {
                                     <Row className='justify-content-center'>
                                         <Col lg={3}>
                                             <Row>
-                                               <Link to="/recipeDetail" state={{ recipe:myrecipe }} type="button" class="tw-text-white tw-no-underline tw-bg-green-700 hover:tw-no-underline  hover:tw-bg-green-300 hover:tw-text-black tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-green-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mb-2 tw-dark:bg-green-600 tw-dark:hover:bg-green-700 dark:focus:ring-green-900">View</Link>
+                                               <Link to="/recipeDetail" state={{ recipe:myrecipe }} type="button" className="tw-text-white tw-no-underline tw-bg-green-700 hover:tw-no-underline  hover:tw-bg-green-300 hover:tw-text-black tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-green-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mb-2 tw-dark:bg-green-600 tw-dark:hover:bg-green-700 dark:focus:ring-green-900">View</Link>
                                             </Row>
                                         </Col> 
                                         <Col lg={3}>
-                                             <button type="button" class="tw-text-white tw-bg-yellow-700 tw-hover:bg-yellow-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-yellow-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mb-2 tw-dark:bg-yellow-600 tw-dark:hover:bg-yellow-700 dark:focus:ring-yellow-900">Share</button>
+                                             <button type="button" className="tw-text-white tw-bg-yellow-700 tw-hover:bg-yellow-800 tw-focus:outline-none tw-focus:ring-4 tw-focus:ring-yellow-300 tw-font-medium tw-rounded-full tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mb-2 tw-dark:bg-yellow-600 tw-dark:hover:bg-yellow-700 dark:focus:ring-yellow-900">Share</button>
                                         </Col>
                                     </Row>
                                  </Card.Body>

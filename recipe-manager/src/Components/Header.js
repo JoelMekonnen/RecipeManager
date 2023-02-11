@@ -40,7 +40,7 @@ function Header() {
     };
   
     return (
-      <AppBar position="static" sx={{ backgroundColor: "#FFF", boxShadow:"none" }}>
+      <AppBar position="static" sx={{  boxShadow:"none", backgroundColor:'#66023C' }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -108,8 +108,11 @@ function Header() {
                 flexGrow: 1,
                 fontFamily: 'Source Sans Pro',
                 fontWeight: 700,
-                color: 'inherit',
+                color: '#00',
                 textDecoration: 'none',
+                ':hover': {
+                  color: '#FFF'
+              }
               }}
             >
               My-Recipe
@@ -138,31 +141,40 @@ function Header() {
                 flexGrow: 1,
                 fontFamily: 'Source Sans Pro',
                 fontWeight: 700,
-                color: '#000',
+                color: '#FFF',
                 textDecoration: 'none',
-                width: '50%'
+                width: '50%',
+                ':hover': {
+                    color: '#FFF'
+                }
+                
               }}
             >
               Recipe Manager
             </Typography>
                <MenuItem>
                      <Link to="/">
-                         <Typography textAlign="center" fontFamily="Source code pro"  sx={{ my: 2, color: 'black', display: 'block', marginRight:'20px', fontWeight: 'bold'}}> Home </Typography>
+                         <Typography textAlign="center" fontFamily="Source code pro"  sx={{ my: 2, color: 'white', display: 'block', marginRight:'20px', fontWeight: 'bold'
+                }}> Home </Typography>
                      </Link>
                 </MenuItem>
                 <MenuItem>
                      <Link to="/About">
-                         <Typography textAlign="center" fontFamily="Source code pro" sx={{ my: 2, color: 'black', display: 'block',  marginRight:'20px',  fontWeight: 'bold'}}> About </Typography>
+                         <Typography textAlign="center" fontFamily="Source code pro" sx={{ my: 2, color: 'white', display: 'block',  marginRight:'20px',  fontWeight: 'bold'}}> About </Typography>
                      </Link>
                 </MenuItem>
                 <MenuItem>
                      <Link to="/Contact">
-                         <Typography textAlign="center" fontFamily="Source code pro" sx={{ my: 2, color: 'black', display: 'block', marginRight:'20px', fontWeight: 'bold'}}> Contact </Typography>
+                         <Typography textAlign="center" fontFamily="Source code pro" sx={{ my: 2, color: 'white', display: 'block', marginRight:'20px', fontWeight: 'bold',  ':hover': {
+                    color: '#FFF'
+                }}}> Contact </Typography>
                      </Link>
                 </MenuItem>
                 <MenuItem>
                      <Link to="/Login">
-                         <Typography textAlign="center" fontFamily="Source code pro" sx={{ my: 2, color: 'black', display: 'block', marginRight:'20px',  fontWeight: 'bold'}}> Login </Typography>
+                         <Typography textAlign="center" fontFamily="Source code pro" sx={{ my: 2, color: 'white', display: 'block', marginRight:'20px',  fontWeight: 'bold',  ':hover': {
+                    color: '#FFF'
+                }}}> Login </Typography>
                      </Link>
                 </MenuItem>
             </Box>

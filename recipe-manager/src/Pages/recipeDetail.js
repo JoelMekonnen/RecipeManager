@@ -13,7 +13,7 @@ export default function RecipeDetail(props) {
            <Container className='tw-bg-gray-200 mt-3 p-3'>
                 <Row className="justify-content-center">
                     <Col lg={12}>
-                            <h1 className='h1'  style={{ 'fontFamily':'Source Sans Pro', "marginLeft":"15%" }} > { recipe["recipe-Name"] } </h1> 
+                            <h3 className='h1'  style={{ 'fontFamily':'Source Sans Pro', "marginLeft":"15%" }} > { recipe["recipe-Name"] } </h3> 
                     </Col>
                 </Row>
            </Container>
