@@ -15,7 +15,12 @@ export default function TrendingSection() {
            "recipe": [
                "1KG Meat", "2 oninons", "2 tommatoes", "salt", "pepper"
            ],
-           "image":"./assets/pizza.jpg"
+           "image":"./assets/pizza.jpg",
+           "procedures": [
+            "dice the onions using the knife",
+            "chop the tomatoes into tommato paste",
+            "add 3 glass of water",
+        ]
       }, 
       {
           "id": 2,
@@ -24,7 +29,12 @@ export default function TrendingSection() {
            "recipe": [
                "1KG Meat", "2 oninons", "2 tommatoes", "salt", "pepper"
            ],
-           "image":"./assets/pizza.jpg"
+           "image":"./assets/pizza.jpg",
+           "procedures": [
+            "dice the onions using the knife",
+            "chop the tomatoes into tommato paste",
+            "add 3 glass of water",
+        ]
       },
       {
         "id": 3,
@@ -33,7 +43,12 @@ export default function TrendingSection() {
            "recipe": [
                "1KG Meat", "2 oninons", "2 tommatoes", "salt", "pepper"
            ],
-           "image":"./assets/pizza.jpg"
+           "image":"./assets/pizza.jpg",
+           "procedures": [
+            "dice the onions using the knife",
+            "chop the tomatoes into tommato paste",
+            "add 3 glass of water",
+        ]
       },
       {
         "id": 4,
@@ -42,7 +57,12 @@ export default function TrendingSection() {
         "recipe": [
             "1KG Meat", "2 oninons", "2 tommatoes", "salt", "pepper"
         ],
-        "image":"./assets/pizza.jpg"
+        "image":"./assets/pizza.jpg",
+        "procedures": [
+            "dice the onions using the knife",
+            "chop the tomatoes into tommato paste",
+            "add 3 glass of water",
+        ]
    }, 
    {
        "id": 5,
@@ -51,7 +71,12 @@ export default function TrendingSection() {
         "recipe": [
             "1KG Meat", "2 oninons", "2 tommatoes", "salt", "pepper"
         ],
-        "image":"assets/pizza.jpg"
+        "image":"assets/pizza.jpg",
+        "procedures": [
+            "dice the onions using the knife",
+            "chop the tomatoes into tommato paste",
+            "add 3 glass of water",
+        ]
    },
    {
       "id": 6,
@@ -60,25 +85,30 @@ export default function TrendingSection() {
         "recipe": [
             "1KG Meat", "2 oninons", "2 tommatoes", "salt", "pepper"
         ],
-        "image":"./assets/pizza.jpg"
+        "image":"./assets/pizza.jpg",
+        "procedures": [
+            "dice the onions using the knife",
+            "chop the tomatoes into tommato paste",
+            "add 3 glass of water",
+        ]
    }
   ]
   return (
       <Container fluid>
-          <Row className='justify-content-center p-3 mt-4 tw-bg-green-400'>
+          <Row className='justify-content-center  !tw-mt-16 tw-bg-gray-800 !tw-p-[50px] '>
                 <Col lg={6} xs={12} md={12} sm={10}>
                    <Row className='justify-content-center'>
-                      <h1 className='h1 headerFamily'> Create, Manage, and Save your Recipes </h1>
+                      <h1 className='h1 !tw-ml-[40px]'> Create, Manage, and Save your Recipes </h1>
                    </Row>
                     <Row className='justify-content-center'>
-                      <p style={{ "fontFamily":"Source Sans Pro" }}> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat metus magna, in volutpat dolor sodales non. Aliquam erat volutpat. Proin quis nibh tempus, mattis tortor commodo, tempor lectus. Cras mi lorem, congue quis neque eu, malesuada posuere purus. Duis tristique turpis at magna lobortis, vitae suscipit elit consectetur. Aenean.  </p>
+                      <p className="tw-text-xl tw-text-gray-400 tw-mt-5 !tw-ml-16 md:tw-ml-10"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat metus magna, in volutpat dolor sodales non. Aliquam erat volutpat. Proin quis nibh tempus, mattis tortor commodo, tempor lectus. Cras mi lorem, congue quis neque eu, malesuada posuere purus. Duis tristique turpis at magna lobortis, vitae suscipit elit consectetur. Aenean.  </p>
                    </Row> 
                 </Col>
           </Row>
           <Row className='justify-content-center mt-5 mb-5'>
               <Col lg={4}>
                   <Row>
-                  <Form className="col-lg-6">
+                  <Form className="col-lg-8">
                         <Form.Group className=''>
                              <Form.Control type="text" placeholder="search"/>
                         </Form.Group>
@@ -96,11 +126,11 @@ export default function TrendingSection() {
                     recipes.map((myrecipe) => {
                          return  (
                            <Col lg={4} className='p-1' key={myrecipe.id}>
-                              <Card>
-                                <div className="tw-bg-gray-100 tw-text-black">
+                              <Card className='tw-border-none !tw-bg-gray-800 !tw-text-gray-400'>
+                                <div className="">
                                 <Card.Body>
                                     <Row className='justify-content-center'>
-                                            <h3 style={{ textAlign:"center" }} className='headerFamily'> { myrecipe['recipe-Name'] }</h3>
+                                            <h3 style={{ textAlign:"center" }} className='tw-text-xxl !tw-text-gray-200'> { myrecipe['recipe-Name'] }</h3>
                                     </Row>
                                     <Row className='justify-content-center'>
                                             <p className='customParagraph'> { myrecipe['recipe-description'] }</p>
