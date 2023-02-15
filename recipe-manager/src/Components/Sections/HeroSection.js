@@ -9,7 +9,7 @@ export default function HeroSection() {
           <Row className='tw-w-full tw-h-2/4 tw-justify-center' >
               <Col lg={8}>
                  <Row className="justify-content-center">
-                     <h1 className='tw-font-inter tw-text-center tw-text-white headerFamily !tw-mt-16 !tw-ml-16 tw-text-bold' style={{ textAlign:"center" }}> GET YOUR MENU ON </h1>
+                     <h1 className='tw-font-inter tw-text-center tw-text-green-400 headerFamily !tw-mt-16 !tw-ml-16 tw-text-bold' style={{ textAlign:"center" }}> GET YOUR MENU ON </h1>
                  </Row>
                  <Row className="justify-content-center">
                     <Col lg={10} className="!tw-ml-16">

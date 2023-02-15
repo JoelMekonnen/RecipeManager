@@ -98,7 +98,7 @@ export default function TrendingSection() {
           <Row className='justify-content-center  !tw-mt-16 tw-bg-gray-800 !tw-p-[50px] '>
                 <Col lg={6} xs={12} md={12} sm={10}>
                    <Row className='justify-content-center'>
-                      <h1 className='h1 !tw-ml-[40px]'> Create, Manage, and Save your Recipes </h1>
+                      <h1 className='h1 !tw-ml-[40px] tw-text-green-400'> Create, Manage, and Save your Recipes </h1>
                    </Row>
                     <Row className='justify-content-center'>
                       <p className="tw-text-xl tw-text-gray-400 tw-mt-5 !tw-ml-16 md:tw-ml-10"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat metus magna, in volutpat dolor sodales non. Aliquam erat volutpat. Proin quis nibh tempus, mattis tortor commodo, tempor lectus. Cras mi lorem, congue quis neque eu, malesuada posuere purus. Duis tristique turpis at magna lobortis, vitae suscipit elit consectetur. Aenean.  </p>

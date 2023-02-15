@@ -4,10 +4,12 @@ import close from "./close.svg";
 import burger from "./burger.jpg";
 import pizza from './pizza.jpg'
 import pay from './QR-Pay.jpg'
+import restaurant from './restaurants.jpg';
 export {
   menu,
   close,
   burger,
   pizza,
-  pay
+  pay,
+  restaurant
 };
