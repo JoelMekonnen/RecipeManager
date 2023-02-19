@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { Row, Col, Card,  Container, Button} from 'react-bootstrap'
+import Footer from '../Components/Footer'
 import Header from '../Components/Header'
 
 
 export default class Contact extends Component {
   render() {
     return (
-      <div className='tw-bg-gray-900 tw-pb-5'>
+      <div className='tw-bg-gray-900'>
           <Header/>
           <Container fluid>
                 <Row className='justify-content-center tw-h-screen'>
@@ -68,6 +69,9 @@ export default class Contact extends Component {
                             </Row>
                     </Col>
                 </Row>
+          </Container>
+          <Container fluid>
+              <Footer/>
           </Container>
       </div>
     )

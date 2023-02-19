@@ -105,7 +105,7 @@ export default function TrendingSection() {
                    </Row> 
                 </Col>
           </Row>
-          {/* <Row className='justify-content-center mt-5 mb-5'>
+          <Row className='justify-content-center mt-5 mb-5'>
               <Col lg={4}>
                   <Row>
                   <Form className="col-lg-8">
@@ -119,7 +119,7 @@ export default function TrendingSection() {
                   </Row>
                      
               </Col>
-          </Row> */}
+          </Row>
           <Container>
           <Row className="justify-content-center mt-5 ">
                 {

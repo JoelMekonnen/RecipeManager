@@ -6,10 +6,11 @@ import Footer from '../Components/Footer'
 export default class Homepage extends Component {
   render() {
     return (
-      <div className='tw-h-auto tw-font-inter tw-antialiased tw-bg-gray-900 tw-text-gray-200 tw-tracking-tight tw-pb-32'>
+      <div className='tw-h-auto tw-font-inter tw-antialiased tw-bg-gray-900 tw-text-gray-200 tw-tracking-tight'>
          <Header/>
          <HeroSection/>
          <TrendingSection/>
+         <Footer/>
       </div>
     )
   }

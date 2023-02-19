@@ -6,11 +6,12 @@ import KitchenIcon from '@mui/icons-material/Kitchen';
 import LockIcon from '@mui/icons-material/Lock';
 import { Row, Col, Card,  Container, Button} from 'react-bootstrap'
 import { restaurant } from '../assets';
+import Footer from '../Components/Footer';
 
 export default class About extends Component {
   render() {
     return (
-       <div className='tw-bg-gray-900 tw-pb-5 !tw-h-screen'>
+       <div className='tw-bg-gray-900 !tw-h-screen'>
           <Header/>
           <Container fluid>
                 <Row className='justify-content-center'>
@@ -100,7 +101,9 @@ export default class About extends Component {
                         
                     </Col>
                 </Row> */}
+                
           </Container>
+          <Footer/>
        </div>
     )
   }
