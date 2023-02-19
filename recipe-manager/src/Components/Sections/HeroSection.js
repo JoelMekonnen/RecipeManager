@@ -17,7 +17,7 @@ export default function HeroSection() {
                     </Col>
                  </Row>
                  <Row className='justify-content-center'>
-                     <Col lg={6} className='!tw-mt-16'>
+                     <Col lg={6} className='!tw-mt-16'> 
                          <img src={pay} alt='QR-pay' className='tw-w-full tw-rounded-lg tw-opacity-50 hover:tw-opacity-100 tw-ml-10' />
                      </Col>
                  </Row>

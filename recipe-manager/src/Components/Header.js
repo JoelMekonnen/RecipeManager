@@ -97,6 +97,9 @@ function Header() {
                          <Typography textAlign="center" fontFamily="Source code pro" sx={{ my: 2,  display: 'block', marginRight:'20px'}}> Login </Typography>
                      </Link>
                 </MenuItem>
+                <MenuItem>
+                     <button type="button" class="tw-text-gray-900 !tw-bg-yellow-700 tw-border tw-border-gray-300 focus:tw-outline-none hover:tw-bg-gray-100 focus:tw-ring-4 focus:tw-ring-gray-200 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-mr-2 tw-mb-2 dark:tw-bg-gray-800 dark:tw-text-white dark:tw-border-gray-600 dark:hover:tw-bg-gray-700 dark:hover:tw-border-gray-600 dark:focus:tw-ring-gray-700">Submit</button>
+                </MenuItem>
               </Menu>
               <Typography
               variant="h5"
@@ -172,10 +175,11 @@ function Header() {
                 </MenuItem>
                 <MenuItem>
                      <Link to="/Login">
-                         <Typography textAlign="center" fontFamily="Source code pro" sx={{ my: 2, color: 'white', display: 'block', marginRight:'20px',  fontWeight: 'bold',  ':hover': {
-                    color: '#FFF'
-                }}}> Login </Typography>
+                     <button type="button" class="!tw-text-white !tw-mt-2 !tw-bg-transparent tw-border tw-border-gray-300 focus:tw-outline-none hover:tw-bg-gray-100 focus:tw-ring-4 focus:tw-ring-gray-200 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-mr-2 tw-mb-2 dark:tw-bg-gray-800 dark:tw-text-gray-900 dark:tw-border-gray-600 dark:hover:tw-bg-gray-700 dark:hover:tw-border-gray-600 dark:focus:tw-ring-gray-700">Login</button>
                      </Link>
+                </MenuItem>
+                <MenuItem >
+                     <button type="button" class="tw-text-gray-900 !tw-mt-2 !tw-bg-green-400 tw-border tw-border-gray-300 focus:tw-outline-none hover:tw-bg-gray-100 focus:tw-ring-4 focus:tw-ring-gray-200 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-mr-2 tw-mb-2 dark:tw-bg-gray-800 dark:tw-text-gray-900 dark:tw-border-gray-600 dark:hover:tw-bg-gray-700 dark:hover:tw-border-gray-600 dark:focus:tw-ring-gray-700">Sign Up</button>
                 </MenuItem>
             </Box>
 

@@ -10,7 +10,7 @@ import { restaurant } from '../assets';
 export default class About extends Component {
   render() {
     return (
-       <div className='tw-bg-gray-900 tw-pb-5'>
+       <div className='tw-bg-gray-900 tw-pb-5 !tw-h-screen'>
           <Header/>
           <Container fluid>
                 <Row className='justify-content-center'>
@@ -31,7 +31,7 @@ export default class About extends Component {
                     </Col>
                 </Row>
                 
-                <Row className='justify-content-center'>
+                {/* <Row className='justify-content-center'>
                     <Col lg={8} className='lg:tw-mt-20'>
                          <Row className="justify-content-center !tw-mt-12">
                                 <Col lg={3}>
@@ -99,7 +99,7 @@ export default class About extends Component {
                          </Row>
                         
                     </Col>
-                </Row>
+                </Row> */}
           </Container>
        </div>
     )
