@@ -1,4 +1,4 @@
-const express = requrie('express')
+const express = require('express')
 const mongoose = require('mongoose')
 const userModel = require('../models/userModels.js')
 
@@ -12,7 +12,9 @@ const validateLoginInput = require("../validation/login.js")
 
 const userRegister = async (req, res) => {
      const { error, isValid } = validateRegisterInput(req.body)
+    
      if (!isValid) {
+          console.log(isValid)
            return res.status(502).json(error)
      }   
     await userModel.findOne({email:req.body.email}).then(user => {
@@ -39,6 +41,7 @@ const userRegister = async (req, res) => {
 }
 
 const userLogin = async (req, res) => {
+     console.log(req.body)
      const { errors, isValid } = validateLoginInput(req.body)
      if(!isValid) {
           res.status(400).json({err: errors})
@@ -77,5 +80,8 @@ const userLogin = async (req, res) => {
                }
          })
      })
-
 }
+const sayHello = async (req, res) => {
+       res.status(200).json({welcome:"Hello User, welcome"})
+}
+module.exports = { userRegister, userLogin, sayHello }

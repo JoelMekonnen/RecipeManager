@@ -13,7 +13,7 @@ module.exports = function validateLoginInput(data) {
           errors.email = "Email is invalid"
        }
 
-       if(Validator.isEmpty(data.passwrd)) {
+       if(Validator.isEmpty(data.password)) {
           errors.password = "Password field is required"
        }
        return {
