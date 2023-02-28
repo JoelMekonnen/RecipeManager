@@ -20,6 +20,9 @@ export default class Login extends Component {
     axios.post(request_urls.login, data).then((res) => {
         if(res.status === 200) {
              console.log(res.data)
+             if(res.data.user.accountType === "OWNER") {
+                   window.location.replace("/Admin/Home")
+             }
         }
     }).catch((error) => {
          console.log(error.message)

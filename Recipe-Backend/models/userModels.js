@@ -2,10 +2,14 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
-     name: {
+     firstname: {
          type: String,
          required: true,
      },
+     lastname: {
+         type: String,
+         required: true,
+       },
      email: {
         type: String,
         required: true,
@@ -19,7 +23,8 @@ const userSchema = new Schema({
         enum: {
             values: ["OWNER", "ADMINSTRATOR", "BLOGGER", "CHEF"],
             message: '{VALUE} is not supported'
-        }
+        },
+        default:"OWNER",
 
      }
 })

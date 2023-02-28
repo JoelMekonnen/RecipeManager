@@ -11,18 +11,19 @@ const validateLoginInput = require("../validation/login.js")
 
 
 const userRegister = async (req, res) => {
-     const { error, isValid } = validateRegisterInput(req.body)
+     const { errors, isValid } = validateRegisterInput(req.body)
     
      if (!isValid) {
           console.log(isValid)
-           return res.status(502).json(error)
+           return res.status(500).json(errors)
      }   
     await userModel.findOne({email:req.body.email}).then(user => {
          if(user) {
               return res.status(400).json({email:"Email alread exists"})
          } else {
               const newUser = new userModel({
-                   name: req.body.name,
+                   firstname: req.body.firstname,
+                   lastname: req.body.lastname,
                    email:req.body.email,
                    password: req.body.password,
                    accountType: req.body.accountType,
@@ -44,7 +45,7 @@ const userLogin = async (req, res) => {
      console.log(req.body)
      const { errors, isValid } = validateLoginInput(req.body)
      if(!isValid) {
-          res.status(400).json({err: errors})
+         return res.status(400).json({err: errors})
      }
      const email = req.body.email
      const password = req.body.password

@@ -6,7 +6,12 @@ import Contact from './Pages/Contact';
 import RecipeDetail from './Pages/recipeDetail';
 import './index.css'
 import Login from './Pages/Login';
+import Register from './Pages/Register';
+import AdminHome from './Pages/Admin/AdminHome';
 import  { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Provider } from 'react-redux'
+import store from './store'
+import './scss/style.scss'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function RecipeManager() {
@@ -16,17 +21,19 @@ export default function RecipeManager() {
                      <Route index element={<Homepage/>} />
                      <Route path="/Login" element={<Login/>}/>
                      <Route path="/About" element={<About/>}/>
+                     <Route path="/Admin/Home" element={<AdminHome/>}/>
                      <Route path="/Contact" element={<Contact/>}/>
                      <Route path='/recipeDetail' element={<RecipeDetail/>}/>
+                     <Route path='/Register' element={<Register/>}></Route>
                   </Routes>
             </BrowserRouter>
        );
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <RecipeManager />
-  </React.StrictMode>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
