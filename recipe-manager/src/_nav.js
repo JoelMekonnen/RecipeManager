@@ -18,7 +18,9 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import BrunchDiningIcon from '@mui/icons-material/BrunchDining';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
 import PeopleIcon from '@mui/icons-material/People';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 const _nav = [
     {
@@ -77,6 +79,34 @@ const _nav = [
               to:'#',
           },
        ]
+   },
+   {
+       component: CNavGroup,
+       name: "Payment",
+       to: '#',
+       icon: <CreditCardIcon className='nav-icon'/>,
+       items: [
+           {
+               component: CNavItem,
+               name: 'My Payments',
+               to: '#',
+           },
+           {
+               component: CNavItem,
+               name: 'Payment Vendors',
+               to:'#'
+           },
+           {
+               component: CNavItem,
+               name: 'Preferences',
+               to:'#',
+           }
+       ]
+   },
+   {
+       component: CNavTitle,
+       name: "Third Party",
+       to: '#'
    },
 
   // {

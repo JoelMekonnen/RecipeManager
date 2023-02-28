@@ -378,14 +378,14 @@ export default function AdminHome() {
                               />
                           </CCol>
                      </CRow>
-                     <CCard className='mb4'>
+                     <CCard className='mb4 !tw-bg-gray-800 !tw-text-white'>
                           <CCardBody>
                               <CRow>
                                   <CCol sm={5}>
                                        <h4 id="request" className="card-title mb-0">
                                              User Orders
                                        </h4>
-                                       <div className="small-text text-medium-emphasis">January - December</div>
+                                       <div className="small-text  tw-text-gray-300">January - December</div>
                                   </CCol>
                                   <CCol sm={7} className="d-none d-md-block">
                                         <CButton color="primary" className="float-end">
@@ -403,6 +403,7 @@ export default function AdminHome() {
                                   </CCol>
                               </CRow>
                               <CChartLine
+                                className='tw-text-white'
                                 style={{ height: '300px', marginTop: '40px' }}
                                 data={{
                                   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -443,8 +444,8 @@ export default function AdminHome() {
                                     {
                                       label: 'My Third dataset',
                                       backgroundColor: 'transparent',
-                                      borderColor: getStyle('--cui-danger'),
-                                      pointHoverBackgroundColor: getStyle('--cui-danger'),
+                                      borderColor: getStyle('--cui-primary'),
+                                      pointHoverBackgroundColor: getStyle('--cui-primary'),
                                       borderWidth: 1,
                                       borderDash: [8, 5],
                                       data: [65, 65, 65, 65, 65, 65, 65],
