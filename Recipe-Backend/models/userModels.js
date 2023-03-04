@@ -25,7 +25,14 @@ const userSchema = new Schema({
             message: '{VALUE} is not supported'
         },
         default:"OWNER",
-
+     },
+     accountStatus: {
+        type: String,
+        enum: {
+           values: ["ONBOARDING", "COMPLETED", "BANNED"],
+           message: '{VALUE} is not supported',
+        },
+        default: "ONBOARDING"
      }
 })
 

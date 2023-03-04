@@ -20,7 +20,12 @@ export default class Login extends Component {
     axios.post(request_urls.login, data).then((res) => {
         if(res.status === 200) {
              console.log(res.data)
-             if(res.data.user.accountType === "OWNER") {
+             if((res.data.user.accountStatus === "ONBOARDING") && (res.data.user.accountType === "OWNER"))
+             {
+                  sessionStorage.setItem("user-token", res.data.token)
+                  window.location.replace("/Admin/Company/Register")
+             }
+             else if((res.data.user.accountType === "OWNER") && (res.data.user.accountStatus === "COMPLETED")){
                    window.location.replace("/Admin/Home")
              }
         }
