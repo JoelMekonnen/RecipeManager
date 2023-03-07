@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { useSelector, useDispatch } from 'react-redux'
 import {
   CContainer,
@@ -22,6 +23,13 @@ const AppHeader = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
+  const logoutFunction = () => {
+    localStorage.setItem("user-profile", null)
+    localStorage.setItem("loggedIn", false)
+    localStorage.setItem("user-token", "")
+    window.location.replace("/Login")
+  }
+
   return (
     <CHeader position="sticky" className="mb-4 !tw-bg-gray-800 !tw-text-white border-bottom-0">
       <CContainer fluid>
@@ -29,7 +37,7 @@ const AppHeader = () => {
           className="ps-1"
           onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
         >
-          <CIcon icon={cilMenu} size="lg" />
+          <CIcon style={{ color:'white' }} icon={cilMenu} size="lg" />
         </CHeaderToggler>
         <CHeaderBrand className="mx-auto d-md-none" to="/">
           {/* <CIcon icon={logo} height={48} alt="Logo" /> */}
@@ -49,18 +57,8 @@ const AppHeader = () => {
         </CHeaderNav>
         <CHeaderNav>
           <CNavItem>
-            <CNavLink href="#" className='!tw-text-white'>
-              <CIcon icon={cilBell} size="lg" />
-            </CNavLink>
-          </CNavItem>
-          <CNavItem>
-            <CNavLink href="#" className='!tw-text-white'>
-              <CIcon icon={cilList} size="lg" />
-            </CNavLink>
-          </CNavItem>
-          <CNavItem>
-            <CNavLink href="#" className='!tw-text-white'>
-              <CIcon icon={cilEnvelopeOpen} size="lg" />
+            <CNavLink href="#" onClick={logoutFunction} className='!tw-text-white'>
+                <PowerSettingsNewIcon/>
             </CNavLink>
           </CNavItem>
         </CHeaderNav>

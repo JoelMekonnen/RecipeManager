@@ -4,9 +4,13 @@ import axios from 'axios'
 // import { LoginBG } from '../assets'
 import { Row, Col, Card,  Container, Button} from 'react-bootstrap'
 import  FormData  from 'form-data'
+import { connect } from "react-redux"
 import request_urls from '../utils/connection'
+import { login, logout, setUser } from '../features/userSlice'
+import { Navigate } from 'react-router-dom'
 
-export default class Login extends Component {
+
+class Login extends Component {
   handleSubmit = (e) => {
      e.preventDefault()
     // var reqData = new FormData()
@@ -14,19 +18,24 @@ export default class Login extends Component {
     // reqData.append('password', this.state.password)
     var data = {
         "email":this.state.email,
-        "password":this.state.password
+        "password":this.state.password,
     }
     // console.log(reqData)
     axios.post(request_urls.login, data).then((res) => {
         if(res.status === 200) {
-             console.log(res.data)
+            //  console.log(res.data)
              if((res.data.user.accountStatus === "ONBOARDING") && (res.data.user.accountType === "OWNER"))
              {
                   sessionStorage.setItem("user-token", res.data.token)
                   window.location.replace("/Admin/Company/Register")
              }
              else if((res.data.user.accountType === "OWNER") && (res.data.user.accountStatus === "COMPLETED")){
-                   window.location.replace("/Admin/Home")
+                   localStorage.setItem("user-profile", JSON.stringify(res.data.user))
+                   localStorage.setItem("loggedIn", true)
+                   localStorage.setItem("user-token", res.data.token)
+                   this.props.login()
+                   this.props.setUser(res.data.user)
+                   this.setState({redirect:true})
              }
         }
     }).catch((error) => {
@@ -39,10 +48,11 @@ export default class Login extends Component {
       this.state = {
           email: "",
           password: "",
+          redirect:false
       }
   }
   render() {
-    return (
+    return !this.state.redirect ? (
          <div className='tw-bg-gray-900 tw-h-screen tw-bg-[url("../public/Food.jpg")] tw-bg-no-repeat tw-bg-cover tw-bg-center'>
               <div className='tw-bg-gray-900 tw-pb-5'>
                 <Header/>
@@ -83,7 +93,16 @@ export default class Login extends Component {
                     </Row>
               </Container>
       </div>
-     
-    )
+    ) : <Navigate to="/Admin/Home"/>
   }
 }
+const mapStateToProps = (state) => ({
+    user: state.user,
+
+})
+const mapDispatchToProps = {
+    login, logout, setUser
+}
+    
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
