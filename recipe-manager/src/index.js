@@ -11,6 +11,7 @@ import AdminHome from './Pages/Admin/AdminHome';
 import CreateRecipePage from './Pages/Admin/CreateRecipePage';
 import ListRecipesPage from './Pages/Admin/ListRecipesPage';
 import CreateCompany from './Pages/Admin/CreateCompany';
+import ListIngredient from './Pages/Admin/ListIngredient';
 import  { BrowserRouter, Routes, Route, Router } from "react-router-dom";
 import { Provider } from 'react-redux'
 import store from './store'
@@ -28,6 +29,7 @@ export default function RecipeManager() {
                         <Route path="/Admin/Home" element={<AdminHome/>}/>
                         <Route path="/Admin/Recipe/Create" element={ <CreateRecipePage/> }/>
                         <Route path="/Admin/Recipe/List" element={ <ListRecipesPage/>}/>
+                        <Route path="/Admin/ingredient/List" element={<ListIngredient/>}/>
                      </Route>
                      <Route  path="/Admin/Company/Register" element={<CreateCompany/>}/>
                      <Route path="/Contact" element={<Contact/>}/>
@@ -35,6 +37,7 @@ export default function RecipeManager() {
                      <Route path='/Register' element={<Register/>}/>
                      <Route path="/Login" element={<Login/>}/>
                      <Route path="/About" element={<About/>}/>
+                     
 
                   </Routes>
             </BrowserRouter>

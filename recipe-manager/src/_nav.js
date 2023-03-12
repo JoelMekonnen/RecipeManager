@@ -56,8 +56,8 @@ const _nav = [
           },
           {
              component: CNavItem,
-             name: "Ingredients Creater",
-             to: '#' 
+             name: "List Ingredient",
+             to: '/Admin/ingredient/List' 
           },
           {
             component: CNavItem,

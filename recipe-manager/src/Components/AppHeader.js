@@ -22,6 +22,7 @@ import { AppHeaderDropdown } from './header/index'
 const AppHeader = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
+  const userInfo = useSelector((state) => state.user)
 
   const logoutFunction = () => {
     localStorage.setItem("user-profile", null)
@@ -57,8 +58,10 @@ const AppHeader = () => {
         </CHeaderNav>
         <CHeaderNav>
           <CNavItem>
+            
             <CNavLink href="#" onClick={logoutFunction} className='!tw-text-white'>
-                <PowerSettingsNewIcon/>
+            { userInfo.user.firstname + " " + userInfo.user.lastname } 
+                <PowerSettingsNewIcon style={{ marginLeft:"30px" }}/>
             </CNavLink>
           </CNavItem>
         </CHeaderNav>
