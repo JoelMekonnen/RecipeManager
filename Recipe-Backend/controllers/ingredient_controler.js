@@ -21,17 +21,19 @@ const createIngredient = async (req, res) => {
                 var companyID = await getCompanyid(req.user._id)
                 // lets get the company id from the user
                 // console.log(userCompany)
-                var imageLoc = "/ingImage/" + companyID.companyName + "/Ingredients/" + req.file.filename
-                const newIngredients = ingredients({
+            //     var imageLoc = "/ingImage/" + companyID.companyName + "/Ingredients/" + req.file.filename
+                ingredients.create({
                       name: req.body.ingName,   
                       unitPrice: req.body.price,
-                      image: req.file.filename,
-                      imageLocation: imageLoc,
-                      companyId: companyID,
+                      companyId: companyID._id,
                       
+                }).then((result) => {
+                  return res.status(200).json({msg:result})
+                }).catch((e) => {
+                    console.log(e)
                 })
-                await newIngredients.save()
-                return res.status(200).json({msg:newIngredients})
+            //     await newIngredients.save()
+               
              }
            
       }).catch((err) => {
@@ -53,6 +55,7 @@ const listAllIngredients = async (req, res) => {
 const getIngredientById = async (req, res) => {
       try {
             const ingredientId = req.params.id
+            // console.log(ingredientId)
             const companyID = await getCompanyid(req.user._id)
             const ingInfo = await ingredients.find({_id:ingredientId, companyId:companyID._id})
             if(ingInfo.length == 0) {
@@ -79,6 +82,20 @@ const updateIngredient = async (req, res) => {
                console.log(e)
         }
 }
+// search the ingredient with the given paramaeter
+const searchIngredient = async (req, res) => {
+        try {
+             const company = await getCompanyid(req.user._id)
+             let searchParam = req.body.query
+             ingredients.find({name:{$regex:new RegExp('^'+searchParam+'.*', 'i')}, companyId:company._id}).exec().then((result) => {
+                           return res.status(200).json({"ing":result})
+             }).catch((e) => {
+                   console.log(e)
+             })
+        } catch(e) {
+              console.log(e)
+        }
+}
 // delete the ingredient
 
-module.exports = { createIngredient, listAllIngredients, getIngredientById, updateIngredient}
+module.exports = { createIngredient, listAllIngredients, getIngredientById, updateIngredient, searchIngredient}

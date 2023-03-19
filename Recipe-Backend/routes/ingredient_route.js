@@ -26,13 +26,14 @@ var ingredientStorage = multer.diskStorage({
 })
 
 var ingredientUpload = multer({storage:ingredientStorage})
-const { createIngredient, listAllIngredients, getIngredientById, updateIngredient } = require('../controllers/ingredient_controler')
+const { createIngredient, listAllIngredients, getIngredientById, updateIngredient, searchIngredient } = require('../controllers/ingredient_controler')
 
 
 router.post('/create', passport.authenticate('jwt', {session:false}), checkIfUserHasCompany, ingredientUpload.single('ingredientFile'), json, createIngredient)
 router.get('/list', passport.authenticate('jwt', {session:false}), checkIfUserHasCompany, listAllIngredients)
 router.get('/get/:id', passport.authenticate('jwt', {session:false}), checkIfUserHasCompany, getIngredientById)
 router.post('/update/:id', passport.authenticate('jwt', {session:false}), checkIfUserHasCompany, json, updateIngredient)
+router.post('/search', passport.authenticate('jwt', {session:false}), checkIfUserHasCompany, json, searchIngredient)
 
 
 module.exports = router
