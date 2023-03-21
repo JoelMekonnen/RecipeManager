@@ -20,6 +20,10 @@ const RecipeSchema = new Schema({
       }],
       procedure: [String],
       totalPrice: Number,
+      created_at: {
+          type:Date,
+          default: Date.now()  
+      },
       companyID: {
            type:mongoose.ObjectId,
            ref: 'companyModel'

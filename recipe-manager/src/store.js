@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 import userReducer from './features/userSlice'
 import sidebarReducer from './features/sidebarSlice'
+import ingredientReducer from './features/IngredientSlice'
 
 // const initialState = {
 //   sidebarShow: true,
@@ -20,7 +21,8 @@ import sidebarReducer from './features/sidebarSlice'
 // const store = createStore(changeState)
 const rootReducer = combineReducers({
       user:userReducer,
-      sidebar:sidebarReducer
+      sidebar:sidebarReducer,
+      ingredientUpdate:ingredientReducer
 })
 const store = configureStore({
      reducer: rootReducer

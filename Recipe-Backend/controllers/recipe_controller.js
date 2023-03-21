@@ -43,7 +43,8 @@ const getRecipes = async (req, res) => {
      const user_id = req.user._id
      // fetch the user
      const fetchCompany = await getCompanyid(user_id)
-    await recipes.find({}).populate('ingredientList.ingredientID').then((result) => {
+     // console.log(fetchCompany)
+    await recipes.find({companyID:fetchCompany._id}).populate('ingredientList.ingredientID').then((result) => {
           return res.status(200).json({'msg':result})
     }).catch((e) => {
           console.log(e)
