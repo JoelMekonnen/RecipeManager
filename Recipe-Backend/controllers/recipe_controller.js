@@ -49,7 +49,25 @@ const getRecipes = async (req, res) => {
     }).catch((e) => {
           console.log(e)
     })
-
 }
 
-module.exports = { createRecipe, getRecipes }
+const getRecipesById = async (req, res) => {
+       const recipe_id = req.params.id
+       const company = await getCompanyid(req.user._id)
+       await recipes.find({companyID:company.id, _id:recipe_id}).populate('ingredientList.ingredientID').then((result) => {
+            return res.status(200).json({'msg':result})
+       }).catch((e) => {
+            console.log(e)
+            return res.status(500).json({'err':'something went wrong'})
+       })
+}
+const updateRecipe = async (req, res) => {
+      const { name, ingredientList, procedure, totalPrice, recipe_id } = req.body
+      const company = await getCompanyid(req.user._id)
+      await recipes.findOneAndUpdate({companyID:company.id, _id:recipe_id}, { recipeName:name, ingredientList:ingredientList, procedure:procedure, totalPrice:totalPrice }, {new:true}).exec().then((result) => {
+             return res.status(200).json({msg:result})
+      }).catch((error) => {
+            console.log(error)
+      })
+}
+module.exports = { createRecipe, getRecipes, getRecipesById, updateRecipe }

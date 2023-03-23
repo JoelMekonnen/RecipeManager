@@ -8,8 +8,10 @@ const json = bp.json()
 router.use(passport.authenticate('jwt', {session:false}))
 router.use(json)
 
-const { createRecipe, getRecipes } = require('../controllers/recipe_controller')
+const { createRecipe, getRecipes, getRecipesById, updateRecipe } = require('../controllers/recipe_controller')
 router.post('/create', createRecipe)
 router.get('/list', getRecipes)
+router.get('/getById/:id', getRecipesById)
+router.post('/update', updateRecipe)
 
 module.exports = router
