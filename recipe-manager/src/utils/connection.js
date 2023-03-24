@@ -10,6 +10,8 @@ const request_urls = {
       updateIngredient: base_url + "ingredient/update/",
       createIngredient: base_url + "ingredient/create/",
       getRecipe: base_url + "recipe/list",
-      createRecipes: base_url + "recipe/create"
+      createRecipes: base_url + "recipe/create",
+      getRecipeById: base_url + "recipe/getById/",
+      updateRecipe:base_url + "recipe/update"
 }
 export default request_urls

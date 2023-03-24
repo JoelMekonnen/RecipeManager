@@ -14,12 +14,14 @@ import CreateCompany from './Pages/Admin/CreateCompany';
 import ListIngredient from './Pages/Admin/ListIngredient';
 import CreateIngredient from './Pages/Admin/CreateIngredient';
 import UpdateIngredient from './Pages/Admin/UpdateIngredient';
+import RecipesDetailPage from './Pages/Admin/RecipeDetail';
 import  { BrowserRouter, Routes, Route, Router} from "react-router-dom";
 import { Provider } from 'react-redux'
 import store from './store'
 import './scss/style.scss'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProtectedRoute from './utils/protectedRoutes';
+
 export default function RecipeManager() {
        let checkLoggedIn =  localStorage.getItem("loggedIn")
       //  console.log(checkLoggedIn)
@@ -32,7 +34,7 @@ export default function RecipeManager() {
                         <Route path="/Admin/Recipe/Create" element={ <CreateRecipePage/> }/>
                         <Route path="/Admin/Recipe/List" element={ <ListRecipesPage/>}/>
                         <Route path="/Admin/ingredient/List" element={<ListIngredient/>}/>
-                        {/* <Route path="/Admin/ingredient/create" element={<CreateIngredient/>}/> */}
+                        <Route path="/Admin/Recipe/:id/Detail" element={<RecipesDetailPage/>}/>
                         {/* <Route path="/Admin/ingredient/:id/update" element={<UpdateIngredient/>}/> */}
                      </Route>
                      <Route  path="/Admin/Company/Register" element={<CreateCompany/>}/>

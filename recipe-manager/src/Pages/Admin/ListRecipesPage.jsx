@@ -5,6 +5,7 @@ import { CContainer, CRow } from '@coreui/react'
 import { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 import {
      CCol,
@@ -103,7 +104,7 @@ export default function ListRecipesPage() {
                                                             </CTableDataCell>
                                                             <CTableDataCell className="!tw-text-white">
                                                                  {/* <Button className='bg-success'> update </Button> */}
-                                                                 <Button className="btn btn-primary">View</Button>
+                                                                 <Link to={ "/Admin/Recipe/" + recipe._id + "/Detail" }  className="btn btn-primary">View</Link>
                                                             </CTableDataCell>
                                                       </CTableRow>
                                                      )
