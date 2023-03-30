@@ -9,6 +9,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
 import axios from 'axios'
 import { Button } from 'react-bootstrap'
+import '../../css/style.css'
 import {
      CCol,
      CButton,
@@ -43,6 +44,7 @@ export default function RecipesDetailPage(props) {
   const [ingUnit, setIngUnit] = useState("")  // the unit of the ingredient
   const [updated, setUpdated] = useState(false) // to check if there was a successful update
   const [toggleUpdate, setToggleUpdate] = useState(false) // to show the new ingredient adding form
+  const [toggleBtn, setToggleBtn] = useState({ idx:-1, toggle:false })
   const [totalPrice, setTotalPrice] = useState(0) // the total price
 
   useEffect(() => {
@@ -132,7 +134,24 @@ export default function RecipesDetailPage(props) {
 
   }
   const deleteButtonClicked = (idx) => {
-       console.log("Delete button clicked " + idx)
+          const userToken = localStorage.getItem('user-token')
+          const config = {
+          headers: {
+               "Authorization":"Bearer " + userToken
+          }
+          }
+          let newIngList = ingList.filter(list => list._id !== idx);
+          setIngList(newIngList);
+          axios.post(request_urls.updateRecipe, { name:recipeName, ingredientList:newIngList, procedure:procList, recipe_id:recipes._id }, config).then((result) => {
+               if(result.status === 200) {
+                    toast.success("successfuly updated the recipe")
+                    setUpdated(!updated)
+                    setIngredientID("")
+               } else {
+                    toast.error("couldn't update the recipe")
+               }
+               
+          })
   }
   return (
        <div className="!tw-bg-gray-900">
@@ -155,13 +174,13 @@ export default function RecipesDetailPage(props) {
                       <div className="body flex-grow-1 px-3">
                            <CRow className="justify-content-center border-bottom-0">
                                 <CCol sm={10} lg={12}>
-                                     <CRow className='justify-content-center'>
+                                     <CRow className='justify-content-start'>
                                             <CCol lg={3}>
-                                            <h3 className="h3 tw-uppercase" style={{ color:"white", textAlign:"center" }}> My Recipes </h3>
+                                            <h3 className="h3 tw-uppercase header-style" style={{ color:"white", textAlign:"center" }}> My Recipes </h3>
                                       </CCol>
-                                      <CCol lg={6}>
+                                      {/* <CCol lg={6}>
                                           <CFormInput type="text" id="searchIngredient"  placeholder="search ingredient"/>
-                                      </CCol>
+                                      </CCol> */}
                                       <CCol lg={3}>
                                            <CButton  className="btn-primary tw-uppercase"> Create Recipes </CButton>
                                       </CCol>
@@ -172,17 +191,17 @@ export default function RecipesDetailPage(props) {
                                   <CCol lg={12}>
                                       <CCard className='!tw-bg-gray-800 tw-rounded-lg' >
                                             <CCardHeader>
-                                                <h1 className="tw-text-white" style={{ textAlign:"center" }}>{ recipes.recipeName } - { recipes.totalPrice + " birr" } </h1>
+                                                <h1 className="tw-text-white header-style" style={{ textAlign:"center" }}>{ recipes.recipeName } - { recipes.totalPrice + " birr" } </h1>
                                             </CCardHeader>
                                             <CCardBody>
                                                  <CTable className='!tw-rounded-lg' striped>
                                                      <CTableHead>
                                                           <CTableRow>
-                                                                 <CTableHeaderCell className="!tw-text-gray-400"> # </CTableHeaderCell>
-                                                                 <CTableHeaderCell className="!tw-text-gray-400"> Ingredient</CTableHeaderCell>
-                                                                 <CTableHeaderCell className="!tw-text-gray-400"> amount </CTableHeaderCell>
-                                                                 <CTableHeaderCell className="!tw-text-gray-400"> Unit </CTableHeaderCell>
-                                                                 <CTableHeaderCell className="!tw-text-gray-400"> Action </CTableHeaderCell>
+                                                                 <CTableHeaderCell className="!tw-text-gray-400 header-style"> # </CTableHeaderCell>
+                                                                 <CTableHeaderCell className="!tw-text-gray-400 header-style"> Ingredient</CTableHeaderCell>
+                                                                 <CTableHeaderCell className="!tw-text-gray-400 header-style"> amount </CTableHeaderCell>
+                                                                 <CTableHeaderCell className="!tw-text-gray-400 header-style"> Unit </CTableHeaderCell>
+                                                                 <CTableHeaderCell className="!tw-text-gray-400 header-style"> Action </CTableHeaderCell>
                                                           </CTableRow>
                                                      </CTableHead>
                                                       <CTableBody>
@@ -190,21 +209,21 @@ export default function RecipesDetailPage(props) {
                                                       {
                                                        ingList.map((ing, idx) => {
                                                              return(
-                                                            <CTableRow key={'row_' + idx}>
-                                                                  <CTableDataCell  className="!tw-text-gray-400">
+                                                            <CTableRow key={'row_' + idx} onMouseOver={()=>{ setToggleBtn({toggle:true, idx:idx}) }} onMouseOut={() => { setToggleBtn({toggle:false, idx:idx}); }}>
+                                                                  <CTableDataCell  className="!tw-text-gray-400 paragraph-style">
                                                                       {idx + 1}
                                                                  </CTableDataCell>
-                                                                 <CTableDataCell  className="!tw-text-gray-400">
+                                                                 <CTableDataCell  className="!tw-text-gray-400 paragraph-style">
                                                                       {ing.ingredientID.name + " - " + ing.ingredientID.unitPrice + " birr"}
                                                                  </CTableDataCell>
-                                                                 <CTableDataCell  className="!tw-text-gray-400">
+                                                                 <CTableDataCell  className="!tw-text-gray-400 paragraph-style">
                                                                        {ing.ammount}
                                                                  </CTableDataCell>
-                                                                 <CTableDataCell className="!tw-text-gray-400">
+                                                                 <CTableDataCell className="!tw-text-gray-400 paragraph-style">
                                                                        {ing.unit}
                                                                  </CTableDataCell>
                                                                  <CTableDataCell className="!tw-text-gray-400">
-                                                                       <Button className='btn btn-danger' onClick={() => { deleteButtonClicked(idx) }}> Delete </Button>
+                                                                       { toggleBtn.toggle && toggleBtn.idx === idx ?  <Button className='btn btn-danger' onClick={() => { deleteButtonClicked(ing._id) }}> Delete </Button> : "" }
                                                                  </CTableDataCell>
                                                              </CTableRow>
                                                             )
@@ -259,42 +278,6 @@ export default function RecipesDetailPage(props) {
                                                       </>
                                                       </CTableBody>
                                                  </CTable>
-                                                  {/* {
-                                                        toggleUpdate ? <CRow className='justify-content-center'>
-                                                                 <CCol lg={4} className="!tw-mt-5 !tw-mb-5">
-                                                                      <CRow>
-                                                                           <CFormInput type='text' value={searchIngredientName} onChange={searchIngredient}  placeholder='ingredient name'/>
-                                                                      </CRow>
-                                                                      <CRow>
-                                                                           {
-                                                                                     ingSearchResult.length !== 0 ? <div className="tw-bg-white" key={"something"}>
-                                                                                               {
-                                                                                                    ingSearchResult.map((result, idx) => {
-                                                                                                           return(
-                                                                                                               <div>
-                                                                                                                   <p onClick={() => { changeIngredientName(result.name, result._id) }} key={"result_" + idx} className='hover:tw-cursor-crosshair'> { result.name } </p>
-                                                                                                                   <hr />
-                                                                                                               </div>
-                                                                                                           )
-                                                                                                          
-                                                                                                    })
-                                                                                               }
-                                                                                          </div> : " "
-                                                                           }
-                                                                      </CRow>
-                                                                 </CCol>
-                                                                 <CCol lg={3} className="!tw-mt-5 !tw-mb-5">
-                                                                       <CFormInput type='number'  onChange={(e) => {setIngAmmount(e.target.value)}}   placeholder='ammount'/>
-                                                                 </CCol>
-                                                                 <CCol lg={3} className="!tw-mt-5 !tw-mb-5">
-                                                                       <CFormInput type='text'  onChange={(e) => {setIngUnit(e.target.value)}} placeholder='unit'/>
-                                                                 </CCol>
-                                                                 <CCol lg={2} className="!tw-mt-5 !tw-mb-5">
-                                                                       <AddCircleIcon  style={{ color:"white" }}/>
-                                                                 </CCol>
-
-                                                      </CRow> : ""
-                                                  } */}
                                                   <CRow className='justify-content-center '>
                                                        {
                                                        !toggleUpdate ? <CCol lg={4}>
@@ -326,26 +309,39 @@ export default function RecipesDetailPage(props) {
                                   <CCol lg={12}>
                                       <CCard className='!tw-bg-gray-700 tw-rounded-lg' >
                                             <CCardBody>
-                                             {
-                                                       procList.map((proc, idx) => {
-                                                             return(
-                                                                 <div>
-                                                                      <CRow className='justify-content-center' key={'row_' + idx}>
-                                                                                <CCol lg={2} className='!tw-mt-5 !tw-mb-5 tw-text-white'>
-                                                                                     <h5> Step - { idx + 1 } </h5>
-                                                                                </CCol>
-                                                                                <CCol lg={4} className="!tw-mt-5 !tw-mb-5 tw-text-white">
-                                                                                     <h5>{ proc }</h5>
-                                                                                </CCol>
-                                                                                <CCol lg={2} className="!tw-mt-5 !tw-mb-5">
-                                                                                      <IndeterminateCheckBoxIcon style={{ color:"red" }}/>
-                                                                                </CCol>
-                                                                      </CRow>
-                                                                       <hr style={{ borderColor:"white" }}/>
-                                                                 </div>
-                                                            
-                                                            )
-                                                       })
+                                                  {
+                                                    <CTable className="!tw-rounded-lg !tw-mt-5" striped>
+                                                        <CTableHead>
+                                                              <CTableRow>
+                                                                  <CTableHeaderCell className="!tw-text-gray-400 header-cell"> Step-No </CTableHeaderCell>
+                                                                  <CTableHeaderCell className="!tw-text-gray-400 header-cell"> Description </CTableHeaderCell>
+                                                                  <CTableHeaderCell className="!tw-text-gray-400 header-cell"> Action </CTableHeaderCell>
+                                                              </CTableRow>
+                                                        </CTableHead>
+                                                        <CTableBody>
+                                                             {
+                                                                 procList.map((proc, idx) => {
+                                                                      return(
+                                                                      
+                                                                           <CTableRow className='justify-content-center' key={'row_' + idx}>
+                                                                                     <CTableDataCell className='!tw-mt-5 !tw-mb-5 !tw-text-white paragraph-style'>
+                                                                                            { idx + 1 } 
+                                                                                     </CTableDataCell>
+                                                                                     <CTableDataCell lg={4} className="!tw-mt-5 !tw-mb-5 !tw-text-white paragraph-style">
+                                                                                          { proc }
+                                                                                     </CTableDataCell>
+                                                                                     <CTableDataCell>
+                                                                                          <Button className="btn btn-success header-cell" onClick={updateRecipe} style={{ }}> Update </Button> 
+                                                                                     </CTableDataCell>
+                                                                           </CTableRow>
+                                                                                // <hr style={{ borderColor:"white" }}/>
+                                                                 
+                                                                 )
+                                                                 })
+                                                             }
+                                                        </CTableBody>
+                                                     </CTable>
+                                                      
                                                   }
                                                   <CRow className='justify-content-center '>
                                                        <CCol lg={4}>
@@ -353,8 +349,6 @@ export default function RecipesDetailPage(props) {
                                                                   <Button className="btn btn-primary" style={{ marginTop:"30px"  }}> <AddCircleIcon/>  Add Steps </Button>
                                                             </CRow>
                                                         </CCol>
-                                                        
-                                                        
                                                   </CRow>
                                             </CCardBody>
                                       </CCard>
