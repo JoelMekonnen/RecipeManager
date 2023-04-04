@@ -85,6 +85,7 @@ export default function ListRecipesPage() {
                                              <CTableHeaderCell className="tw-text-white"> # </CTableHeaderCell>
                                              <CTableHeaderCell className="tw-text-white"> Recipes</CTableHeaderCell>
                                              <CTableHeaderCell className="tw-text-white"> Price </CTableHeaderCell>
+                                             <CTableHeaderCell className='tw-text-white'>Category</CTableHeaderCell>
                                              <CTableHeaderCell className="tw-text-white"> Action </CTableHeaderCell>
                                           </CTableRow>
                                       </CTableHead>
@@ -101,6 +102,9 @@ export default function ListRecipesPage() {
                                                             </CTableDataCell>
                                                             <CTableDataCell className="!tw-text-white">
                                                                  {recipe.totalPrice}
+                                                            </CTableDataCell>
+                                                            <CTableDataCell className='!tw-text-white'>
+                                                                 { recipe.categoryID.category }
                                                             </CTableDataCell>
                                                             <CTableDataCell className="!tw-text-white">
                                                                  {/* <Button className='bg-success'> update </Button> */}

@@ -12,6 +12,8 @@ const request_urls = {
       getRecipe: base_url + "recipe/list",
       createRecipes: base_url + "recipe/create",
       getRecipeById: base_url + "recipe/getById/",
-      updateRecipe:base_url + "recipe/update"
+      updateRecipe:base_url + "recipe/update",
+      getCategories:base_url + "recipe/category/get",
+      createCategories:base_url + "recipe/category/create"
 }
 export default request_urls

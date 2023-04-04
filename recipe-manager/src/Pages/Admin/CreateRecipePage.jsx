@@ -20,6 +20,7 @@ import {
   CContainer,
   CCardHeader,
   CCardBody,
+  CFormSelect,
   CButton,
   CButtonGroup,
   CTable,
@@ -41,15 +42,18 @@ export default function CreateRecipePage() {
   const [ingredient, setIngredient] = useState({}) // the id of the selected ingredient
   const [ingAmmount, setIngAmmount] = useState(0)  // the new ammount to be added
   const [ingUnit, setIngUnit] = useState("")
+  const [categoryID, setCategoryID] = useState("")
   const [proc, setProc] = useState("")
   const [recipeName, setRecipeName] = useState("")
   const [recipePrice, setRecipePrice] = useState(0)
   const [recipes, setRecipes] = useState({
          name:"",
+         categoryID:"",
          ingList:[],
          procedure:[],
          price:0
   })
+  const [categories, setCategories] = useState([])
   const searchIngredient = (queryText) => {
     setSearchIngredientName(queryText.target.value)
     if(queryText.target.value !== "") {
@@ -72,8 +76,27 @@ export default function CreateRecipePage() {
      }  else {
           setIngSearchResult([])
      }
-
  }
+ // lets get all the categories
+ useEffect(() => {
+       const getCategories = () => {
+          const userToken = localStorage.getItem('user-token')
+          const config = {
+              headers: {
+                 "Authorization":"Bearer " + userToken
+              }
+          }
+          axios.get(request_urls.getCategories, config).then((result) => {
+                  if(result.status === 200) {
+                    //     console.log(result.data.msg)
+                        setCategories(result.data.msg)
+                  }
+          }).catch((e) => {
+               console.log(e)
+          }) 
+       }
+       getCategories()
+ }, [])
  const changeIngredientName = (result) => {
   //    console.log("result clicked " + name)
      setIngredient(result)
@@ -125,8 +148,9 @@ export default function CreateRecipePage() {
        // lets curate the recipe data
        recipes.name = recipeName
        recipes.price = recipePrice
+       recipes.categoryID = categoryID
        console.log(recipes)
-       if((recipes.name === "") || (recipes.ingList.length === 0) || (recipes.procedure.length === 0) || (recipes.price === 0))
+       if((recipes.name === "") || (recipes.ingList.length === 0) || (recipes.procedure.length === 0) || (recipes.price === 0) || (categoryID === ""))
        {
               toast.error("Please fill all the fields required")
        } else {
@@ -150,6 +174,7 @@ export default function CreateRecipePage() {
                          setRecipePrice(0)
                          setIngList([])
                          setIngUnit("")
+                         setCategoryID("")
                          setProcList([])
 
                }    
@@ -158,6 +183,14 @@ export default function CreateRecipePage() {
                }) 
           }  
        console.log(recipes)
+  }
+  // letd define our select on change statement
+
+  const categoryChanged = (event) => {
+        const value = event.target.value;
+     //    setCategories(value)
+        setCategoryID(value)
+     //    console.log(value)
   }
   return (
     <div className='!tw-bg-gray-900'>
@@ -188,25 +221,46 @@ export default function CreateRecipePage() {
                                         <CCard className="!tw-bg-gray-600 tw-rounded-lg">
                                             <CCardHeader>
                                               <CRow>
-                                                  <CCol lg={6}>
+                                                  <CCol lg={4}>
                                                     <CRow>
                                                         <CCol lg={4}>
-                                                            <h5 className='header-style h5 !tw-text-white' style={{ textAlign:"end",lineHeight:"1.8" }}>Recipe-Name:</h5>
+                                                            <h5 className='header-style h5 !tw-text-white' style={{ textAlign:"end",lineHeight:"1.8" }}>Name:</h5>
                                                         </CCol>
                                                         <CCol lg={8}>
                                                           <CFormInput type='text' onChange={(e)=>{ setRecipeName(e.target.value) }} placeholder='Recipe Name'/>
                                                         </CCol>
                                                     </CRow>
                                                   </CCol>
-                                                  <CCol lg={6}>
+                                                  <CCol lg={4}>
                                                     <CRow>
                                                       <CCol lg={4}>
-                                                            <h5 className="header-style h5 !tw-text-white" style={{ textAlign:"end", lineHeight:"1.8" }}>Recipe-Price:</h5>
+                                                            <h5 className="header-style h5 !tw-text-white" style={{ textAlign:"end", lineHeight:"1.8" }}>Price:</h5>
                                                         </CCol>
                                                         <CCol lg={8}>
                                                           <CFormInput type='number' onChange={(e) => { setRecipePrice(e.target.value) }} placeholder='price (birrs)'/>
                                                         </CCol>
                                                     </CRow>
+                                                  </CCol>
+                                                  <CCol lg={4}>
+                                                        <CRow>
+                                                            <CCol lg={4}>
+                                                                 <h5 className="header-style h5 !tw-text-white" style={{ textAlign:"end", lineHeight:"1.8" }}> Category: </h5>
+                                                            </CCol>
+                                                            <CCol lg={8}>
+                                                                  <CFormSelect defaultValue={"Select Category"} onChange={categoryChanged}>
+                                                                      <>
+                                                                              <option defaultValue disabled>
+                                                                                Select Category
+                                                                              </option>
+                                                                           {
+                                                                                 categories.map((ctgs) => {
+                                                                                     return <option key={ctgs._id} value={ctgs._id}>{ctgs.category}</option>
+                                                                                })  
+                                                                           }    
+                                                                           </>
+                                                                      </CFormSelect>
+                                                            </CCol>
+                                                        </CRow>
                                                   </CCol>
                                               </CRow>
                                             </CCardHeader>

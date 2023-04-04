@@ -24,6 +24,10 @@ const RecipeSchema = new Schema({
           type:Date,
           default: Date.now()  
       },
+      categoryID: {
+          type: mongoose.ObjectId,
+          ref: 'categoryModel'
+      },
       companyID: {
            type:mongoose.ObjectId,
            ref: 'companyModel'

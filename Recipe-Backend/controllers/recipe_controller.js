@@ -16,7 +16,7 @@ const createRecipe = async (req, res) => {
     
      // we are going to create the recipe
      // first get all the required field
-     let { name, ingList, procedure, price,  } = req.body
+     let { name, ingList, procedure, price, categoryID} = req.body
 
     // fetch the user id
     let user_id = req.user._id
@@ -29,7 +29,8 @@ const createRecipe = async (req, res) => {
          ingredientList:ingList,
          companyID:fetchCompany._id,
          totalPrice:price,
-         procedure:procedure
+         procedure:procedure,
+         categoryID:categoryID
     }).then((result) => {
           return res.status(200).json({msg:result})
     }).catch((e) => {
@@ -44,7 +45,7 @@ const getRecipes = async (req, res) => {
      // fetch the user
      const fetchCompany = await getCompanyid(user_id)
      // console.log(fetchCompany)
-    await recipes.find({companyID:fetchCompany._id}).populate('ingredientList.ingredientID').then((result) => {
+    await recipes.find({companyID:fetchCompany._id}).populate('ingredientList.ingredientID').populate('categoryID').then((result) => {
           return res.status(200).json({'msg':result})
     }).catch((e) => {
           console.log(e)
