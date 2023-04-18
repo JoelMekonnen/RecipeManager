@@ -11,6 +11,7 @@ const userRoutes = require('./routes/user_routes')
 const companyRoutes = require('./routes/company_routes.js')
 const ingredientRoutes = require('./routes/ingredient_route')
 const recipeRoutes = require('./routes/recipe_routes')
+const unitRoutes = require('./routes/units_routes')
 const path = require('path')
 // starting the email
 
@@ -33,4 +34,5 @@ app.use('/company', companyRoutes)
 app.use('/ingredient', ingredientRoutes)
 app.use('/ingImage', express.static(path.join(__dirname, 'Companies')))
 app.use('/recipe', recipeRoutes)
+app.use('/units', unitRoutes)
 httpServer.listen(port, '0.0.0.0')

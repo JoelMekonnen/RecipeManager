@@ -23,6 +23,7 @@ import {
      CCard,
      CCardBody,
      CCardFooter,
+     CFormSelect,
      CCardHeader,
      CCardText
 } from '@coreui/react'
@@ -43,6 +44,8 @@ export default function RecipesDetailPage(props) {
   const [ingAmmount, setIngAmmount] = useState(0)  // the new ammount to be added
   const [ingUnit, setIngUnit] = useState("")  // the unit of the ingredient
   const [updated, setUpdated] = useState(false) // to check if there was a successful update
+  const [ingUnitList, setIngUnitList] = useState([]) // the ingredient unit list
+  const [ingUnitName, setIngUnitName] = useState("") // the name of the unit selected by the ingredient
   const [toggleUpdate, setToggleUpdate] = useState(false) // to show the new ingredient adding form
   const [toggleBtn, setToggleBtn] = useState({ idx:-1, toggle:false })
   const [totalPrice, setTotalPrice] = useState(0) // the total price
@@ -95,10 +98,15 @@ export default function RecipesDetailPage(props) {
       }
 
   }
-  const changeIngredientName = (name, id) => {
+  const changeIngredientName = (result, id) => {
      //    console.log("result clicked " + name)
         setIngredientID(id)
-        setSearchIngredientName(name)
+        setSearchIngredientName(result.name)
+        axios.get(request_urls.base_url + "units/" + result.unit + "/get").then((result) => {
+          if(result.status === 200) {
+              setIngUnitList(result.data.units)
+          }
+        })
         setIngSearchResult([])
   }
   // lets update the recipe
@@ -220,10 +228,10 @@ export default function RecipesDetailPage(props) {
                                                                        {ing.ammount}
                                                                  </CTableDataCell>
                                                                  <CTableDataCell className="!tw-text-gray-400 paragraph-style">
-                                                                       {ing.unit}
+                                                                       {ing.unit.unit}
                                                                  </CTableDataCell>
                                                                  <CTableDataCell className="!tw-text-gray-400">
-                                                                       { toggleBtn.toggle && toggleBtn.idx === idx ?  <Button className='btn btn-danger' onClick={() => { deleteButtonClicked(ing._id) }}> Delete </Button> : "" }
+                                                                       { toggleBtn.toggle && toggleBtn.idx === idx ? <>  <Button className='btn btn-danger' onClick={() => { deleteButtonClicked(ing._id) }}> Delete </Button></>  : "" }
                                                                  </CTableDataCell>
                                                              </CTableRow>
                                                             )
@@ -247,7 +255,7 @@ export default function RecipesDetailPage(props) {
                                                                                                     ingSearchResult.map((result, idx) => {
                                                                                                          return(
                                                                                                               <div>
-                                                                                                                   <p onClick={() => { changeIngredientName(result.name, result._id) }} key={"result_" + idx} className='hover:tw-cursor-crosshair'> { result.name } </p>
+                                                                                                                   <p onClick={() => { changeIngredientName(result, result._id) }} key={"result_" + idx} className='hover:tw-cursor-crosshair'> { result.name } </p>
                                                                                                                    <hr />
                                                                                                               </div>
                                                                                                          )
@@ -266,8 +274,16 @@ export default function RecipesDetailPage(props) {
                                                                  </CCol>
                                                             </CTableDataCell>
                                                             <CTableDataCell>
+
                                                                  <CCol lg={8}>
-                                                                      <CFormInput type='text'  onChange={(e) => {setIngUnit(e.target.value)}} placeholder='unit'/>
+                                                                      {/* <CFormInput type='text'  onChange={(e) => {setIngUnit(e.target.value)}} value={ingUnit} placeholder='unit'/> */}
+                                                                      <CFormSelect placeholder='select unit' defaultValue={"Select Unit"} onChange={(e) => {setIngUnit(e.target.value);setIngUnitName(e.target.options[e.target.selectedIndex].text);}} name='unitSelect'>
+                                                                            {
+                                                                                ingUnitList.map((unit, idx) => {
+                                                                                       return <option value={unit._id}>{ unit.unit }</option>
+                                                                                })
+                                                                            }
+                                                                      </CFormSelect>
                                                                  </CCol>
                                                             </CTableDataCell>
                                                             <CTableDataCell>

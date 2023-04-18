@@ -10,6 +10,10 @@ const ingredientSchema = new Schema({
              type: Number,
              required: true
         },
+        unit: {
+            type: mongoose.ObjectId,
+            ref:'baseUnitsModel'  
+        },
         image: {
              type:String,
              required:false

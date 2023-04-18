@@ -42,6 +42,8 @@ export default function CreateRecipePage() {
   const [ingredient, setIngredient] = useState({}) // the id of the selected ingredient
   const [ingAmmount, setIngAmmount] = useState(0)  // the new ammount to be added
   const [ingUnit, setIngUnit] = useState("")
+  const [ingUnitName, setIngUnitName] = useState("")
+  const [ingUnitList, setIngUnitList] = useState([])
   const [categoryID, setCategoryID] = useState("")
   const [proc, setProc] = useState("")
   const [recipeName, setRecipeName] = useState("")
@@ -98,22 +100,31 @@ export default function CreateRecipePage() {
        getCategories()
  }, [])
  const changeIngredientName = (result) => {
-  //    console.log("result clicked " + name)
+     // console.log("result clicked " + name)
+     console.log(result)
+     setIngUnitList([])
+     axios.get(request_urls.base_url + "units/" + result.unit + "/get").then((result) => {
+             if(result.status === 200) {
+                 setIngUnitList(result.data.units)
+             }
+     })
      setIngredient(result)
      setSearchIngredientName(result.name)
      setIngSearchResult([])
  }
 
  const addIngredientToRecipes = () => {
+     // console.log(ingUnitName)
         ingList.push({
               ingredientID:ingredient,
               ammount:ingAmmount,
-              unit:ingUnit
+              unit:ingUnit,
+              unitName:ingUnitName
         })
         let ingListArray = {
              ingredientID:ingredient._id,
              ammount:ingAmmount,
-             unit:ingUnit
+             unit:ingUnit,
         }
         setSearchIngredientName("")
         recipes.ingList.push(ingListArray)
@@ -292,7 +303,7 @@ export default function CreateRecipePage() {
                                                                                      {ing.ammount}
                                                                                </CTableDataCell>
                                                                                <CTableDataCell className="!tw-text-gray-400 paragraph-style">
-                                                                                     {ing.unit}
+                                                                                     {ing.unitName}
                                                                                </CTableDataCell>
                                                                                <CTableDataCell>
                                                                                    <Button className='btn btn-danger' onClick={() => { deleteButtonClicked(ing.ingredientID._id) }}> Delete </Button>
@@ -336,7 +347,14 @@ export default function CreateRecipePage() {
                                                             </CTableDataCell>
                                                             <CTableDataCell>
                                                                  <CCol lg={8}>
-                                                                      <CFormInput type='text'  onChange={(e) => {setIngUnit(e.target.value)}} value={ingUnit} placeholder='unit'/>
+                                                                      {/* <CFormInput type='text'  onChange={(e) => {setIngUnit(e.target.value)}} value={ingUnit} placeholder='unit'/> */}
+                                                                      <CFormSelect placeholder='select unit' defaultValue={"Select Unit"} onChange={(e) => {setIngUnit(e.target.value);setIngUnitName(e.target.options[e.target.selectedIndex].text);}} name='unitSelect'>
+                                                                            {
+                                                                                ingUnitList.map((unit, idx) => {
+                                                                                       return <option value={unit._id}>{ unit.unit }</option>
+                                                                                })
+                                                                            }
+                                                                      </CFormSelect>
                                                                  </CCol>
                                                             </CTableDataCell>
                                                             <CTableDataCell>

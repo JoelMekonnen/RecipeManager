@@ -15,7 +15,8 @@ const RecipeSchema = new Schema({
               type:Number,
           },
           unit: {
-              type: String
+              type: mongoose.ObjectId,
+              ref: 'unitsModel'
           }
       }],
       procedure: [String],

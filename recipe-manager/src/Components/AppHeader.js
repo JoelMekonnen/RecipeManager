@@ -44,7 +44,7 @@ const AppHeader = () => {
           {/* <CIcon icon={logo} height={48} alt="Logo" /> */}
         </CHeaderBrand>
         <CHeaderNav className="d-none d-md-flex me-auto ">
-          <CNavItem>
+          {/* <CNavItem>
             <CNavLink to="/dashboard" className='!tw-text-white' component={NavLink}>
               Dashboard
             </CNavLink>
@@ -54,7 +54,7 @@ const AppHeader = () => {
           </CNavItem>
           <CNavItem>
             <CNavLink href="#" className='!tw-text-white'>Settings</CNavLink>
-          </CNavItem>
+          </CNavItem> */}
         </CHeaderNav>
         <CHeaderNav>
           <CNavItem>
@@ -71,7 +71,7 @@ const AppHeader = () => {
       </CContainer>
       {/* <CHeaderDivider /> */}
       <CContainer fluid>
-        <AppBreadcrumb />
+        {/* <AppBreadcrumb /> */}
       </CContainer>
     </CHeader>
   )

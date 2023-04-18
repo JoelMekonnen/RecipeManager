@@ -23,6 +23,7 @@ import {
   CContainer,
   CCardBody,
   CButton,
+  CFormSelect,
   CButtonGroup,
   CTable,
   CTableBody,
@@ -37,15 +38,23 @@ export default function CreateIngredient({refresh, setRefresh}) {
   const [ingredientName, setIngredientName] = useState("")
   const [ingredientPrice, setIngredientPrice] = useState(0)
   const [ingredientChanged, setIngredientChanged] = useState(false)
-
+  const [baseUnitList, setBaseUnitList] = useState([])
+  const [selectedUnitId, setSelectedUnitId] = useState("")
   const dispatch = useDispatch()
 
 
   useEffect(() => {
-  
+        // let get all the list of units available to select
+        axios.get(request_urls.getBaseUnits).then((result) => {
+                setBaseUnitList(result.data.baseUnits)
+        }).catch((err) => {
+               console.log(err)
+        })
+        
   }, [])
   const createIngredient = async () => {
         const userToken = localStorage.getItem('user-token')
+        console.log(selectedUnitId)
         const config = {
             headers: {
                 "Authorization":"Bearer " + userToken
@@ -54,7 +63,7 @@ export default function CreateIngredient({refresh, setRefresh}) {
         const data = {
              "ingName":ingredientName,
              "price":ingredientPrice,
-
+             "baseUnit":selectedUnitId
         }
         axios.post(request_urls.createIngredient, data, config).then((result) => {
                    if(result.status === 200) {
@@ -92,6 +101,20 @@ export default function CreateIngredient({refresh, setRefresh}) {
                                                         <div>
                                                             <label htmlFor="first_name" className="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Price</label>
                                                             <input type="text" id="first_name" onChange={(e) => {setIngredientPrice(e.target.value)} } className="!tw-bg-gray-600 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-blue-500 focus:tw-border-blue-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-blue-500 dark:focus:tw-border-blue-500" placeholder='price' required />
+                                                        </div>
+                                                  </CCol>
+                                              </CRow>
+                                              <CRow className='justify-content-center !tw-mt-5'>
+                                                  <CCol lg={6}>
+                                                        <div>
+                                                            <label htmlFor="ingredientBaseUnit" className="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Measurement</label>
+                                                            <CFormSelect name='ingredientBaseUnit' className='!tw-bg-gray-600 !tw-text-white' style={{ borderStyle:"none" }} onChange={(e)=> {setSelectedUnitId(e.target.value)}}>
+                                                                {
+                                                                     baseUnitList.map((units) => {
+                                                                          return <option key={units._id} value={units._id}> { units.baseUnit } </option>
+                                                                     })
+                                                                }
+                                                            </CFormSelect>
                                                         </div>
                                                   </CCol>
                                               </CRow>

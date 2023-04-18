@@ -26,6 +26,7 @@ const createIngredient = async (req, res) => {
                       name: req.body.ingName,   
                       unitPrice: req.body.price,
                       companyId: companyID._id,
+                      unit: req.body.baseUnit
                       
                 }).then((result) => {
                   return res.status(200).json({msg:result})
@@ -45,7 +46,7 @@ const createIngredient = async (req, res) => {
 const listAllIngredients = async (req, res) => {
       try {
             const companyId = await getCompanyid(req.user._id)
-            var ingredientList = await ingredients.find({companyId: companyId._id})
+            var ingredientList = await ingredients.find({companyId: companyId._id}).populate("unit")
             return res.status(200).json({"ing":ingredientList})
       } catch(e) {
             console.log(e)
