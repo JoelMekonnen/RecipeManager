@@ -48,7 +48,8 @@ export default function RecipesDetailPage(props) {
   const [ingUnitName, setIngUnitName] = useState("") // the name of the unit selected by the ingredient
   const [toggleUpdate, setToggleUpdate] = useState(false) // to show the new ingredient adding form
   const [toggleBtn, setToggleBtn] = useState({ idx:-1, toggle:false })
-  const [totalPrice, setTotalPrice] = useState(0) // the total price
+  const [totalPrice, setTotalPrice] = useState(0) // the total price of the recipe
+
 
   useEffect(() => {
       // lets get all the recipes
@@ -138,8 +139,6 @@ export default function RecipesDetailPage(props) {
                          
                })
           }
-        
-
   }
   const deleteButtonClicked = (idx) => {
           const userToken = localStorage.getItem('user-token')
@@ -161,7 +160,18 @@ export default function RecipesDetailPage(props) {
                
           })
   }
+  // let now calculate the total price of the recipe
+  useEffect(()=> {
+       // lets first get all the ingredients of the recipes
+       var totalPrice = 0;
+       for(let i = 0; i < ingList.length; i++)
+       {
+            totalPrice += ingList[i].ammount * ingList[i].unit.multiplier * ingList[i].ingredientID.unitPrice
+       }
+       setTotalPrice(totalPrice)
+  }, [ingList])
   return (
+
        <div className="!tw-bg-gray-900">
            <ToastContainer 
               position="top-center"
@@ -199,7 +209,7 @@ export default function RecipesDetailPage(props) {
                                   <CCol lg={12}>
                                       <CCard className='!tw-bg-gray-800 tw-rounded-lg' >
                                             <CCardHeader>
-                                                <h1 className="tw-text-white header-style" style={{ textAlign:"center" }}>{ recipes.recipeName } - { recipes.totalPrice + " birr" } </h1>
+                                                <h3 className="tw-text-white header-style" style={{ textAlign:"center" }}>{ recipes.recipeName } - { recipes.totalPrice + " birr" } </h3>
                                             </CCardHeader>
                                             <CCardBody>
                                                  <CTable className='!tw-rounded-lg' striped>
@@ -243,7 +253,7 @@ export default function RecipesDetailPage(props) {
                                                             <CTableDataCell className='!tw-text-gray-400'>
                                                                  { ingList.length + 1 }
                                                             </CTableDataCell>
-                                                            <CTableDataCell className='!tw-text-gray-400'>
+                                                             <CTableDataCell className='!tw-text-gray-400'>
                                                                  <CCol lg={10}>
                                                                  <CRow>
                                                                       <CFormInput type='text' value={searchIngredientName} onChange={searchIngredient}  placeholder='ingredient name'/>
@@ -292,8 +302,30 @@ export default function RecipesDetailPage(props) {
                                                        </CTableRow> : ""
                                                       }
                                                       </>
+                                                        <CTableRow>
+                                                             <CTableDataCell>
+
+                                                             </CTableDataCell>
+                                                             <CTableDataCell>
+                                                                 
+                                                             </CTableDataCell>
+                                                             <CTableDataCell>
+                                                                 
+                                                             </CTableDataCell>
+                                                             <CTableDataCell>
+                                                                  <h5 className='!tw-text-white'>Total Price:</h5>                                                                 
+                                                             </CTableDataCell>
+                                                             <CTableDataCell>
+                                                                  <h5 className='!tw-text-white'>
+                                                                      {
+                                                                           Math.ceil(totalPrice) + " Birr"
+                                                                      }
+                                                                  </h5>                                                                 
+                                                             </CTableDataCell>
+                                                        </CTableRow>
                                                       </CTableBody>
-                                                 </CTable>
+                                                  </CTable>
+                                                  
                                                   <CRow className='justify-content-center '>
                                                        {
                                                        !toggleUpdate ? <CCol lg={4}>
@@ -323,7 +355,7 @@ export default function RecipesDetailPage(props) {
                            </CRow>
                            <CRow className="justify-content-center !tw-mt-5">
                                   <CCol lg={12}>
-                                      <CCard className='!tw-bg-gray-700 tw-rounded-lg' >
+                                      <CCard className='!tw-bg-gray-800 tw-rounded-lg' >
                                             <CCardBody>
                                                   {
                                                     <CTable className="!tw-rounded-lg !tw-mt-5" striped>

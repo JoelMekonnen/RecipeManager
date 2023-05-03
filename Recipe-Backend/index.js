@@ -12,8 +12,11 @@ const companyRoutes = require('./routes/company_routes.js')
 const ingredientRoutes = require('./routes/ingredient_route')
 const recipeRoutes = require('./routes/recipe_routes')
 const unitRoutes = require('./routes/units_routes')
+const storeTypeRoute = require('./routes/store_routes')
 const path = require('path')
-// starting the email
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocument = require('./swagger.json');
+
 
 
 const httpServer = createServer(app)
@@ -28,11 +31,16 @@ app.use((req, res, next) => {
 })
 app.use(passport.initialize())
 require('./middleware/auth')(passport)
-
+app.use(
+      '/api-docs',
+      swaggerUi.serve, 
+      swaggerUi.setup(swaggerDocument)
+);
 app.use('/user', userRoutes)
 app.use('/company', companyRoutes)
 app.use('/ingredient', ingredientRoutes)
 app.use('/ingImage', express.static(path.join(__dirname, 'Companies')))
 app.use('/recipe', recipeRoutes)
 app.use('/units', unitRoutes)
+app.use('/store/type', storeTypeRoute)
 httpServer.listen(port, '0.0.0.0')

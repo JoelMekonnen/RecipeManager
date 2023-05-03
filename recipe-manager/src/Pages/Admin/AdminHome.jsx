@@ -21,7 +21,7 @@ import {
     CButton,
     CButtonGroup,
     CTable,
-    CTableBody,
+    CTableBody,   
     CTableDataCell,
     CTableHead,
     CTableHeaderCell,

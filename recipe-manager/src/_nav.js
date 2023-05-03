@@ -31,7 +31,7 @@ const _nav = [
       component: CNavItem,
       name:'Dashboard',
       to:"/Admin/Home",
-      icon: <DashboardIcon className='nav-icon'/>,
+      icon: <DashboardIcon className='nav-icon !tw-text-white'/>,
       
    },
   //  {
@@ -42,7 +42,7 @@ const _nav = [
        component: CNavGroup,
        name: 'Recipes',
        to: '#',
-       icon: <RestaurantIcon className='nav-icon'/>,
+       icon: <RestaurantIcon className='nav-icon !tw-text-white'/>,
        items: [
           {
             component: CNavItem,
@@ -70,7 +70,7 @@ const _nav = [
        component: CNavGroup,
        name:'Employees',
        to: '#',
-       icon: <PeopleIcon className='nav-icon' />,
+       icon: <PeopleIcon className='nav-icon !tw-text-white' />,
        items: [
             {
               component: CNavItem,
@@ -93,7 +93,7 @@ const _nav = [
        component: CNavGroup,
        name: "Payment",
        to: '#',
-       icon: <CreditCardIcon className='nav-icon'/>,
+       icon: <CreditCardIcon className='nav-icon !tw-text-white'/>,
        items: [
            {
                component: CNavItem,
@@ -120,19 +120,19 @@ const _nav = [
    {
        component: CNavItem,
        name: "Delivery Providers",
-       icon: <LocalShippingIcon className="nav-icon"/>,
+       icon: <LocalShippingIcon className="nav-icon !tw-text-white"/>,
        to: "#"
    },
    {
        component: CNavItem,
        name: "Attendance Sheet",
-       icon: <GridOnIcon className="nav-icon"/>,
+       icon: <GridOnIcon className="nav-icon !tw-text-white"/>,
        to: "#"
    },
    {
        component: CNavItem,
        name: "Website Manager",
-       icon: <LanguageIcon className="nav-icon"/>,
+       icon: <LanguageIcon className="nav-icon !tw-text-white"/>,
        to: "#"
    },
    {
@@ -143,13 +143,13 @@ const _nav = [
    {
        component: CNavItem,
        name: "About Company",
-       icon: <BusinessIcon className="nav-icon"/>,
+       icon: <BusinessIcon className="nav-icon !tw-text-white"/>,
        to: "#"
    },
    {
       component: CNavItem,
       name: "Account Settings",
-      icon: <SettingsIcon className='nav-icon'/>,
+      icon: <SettingsIcon className='nav-icon !tw-text-white'/>,
       to: "#"
    },
   

@@ -27,7 +27,7 @@ const AppSidebar = () => {
       position="fixed"  
       unfoldable={unfoldable}
       visible={sidebarShow}
-      className='!tw-bg-gray-800'
+      className='!tw-bg-gray-700 tw-text-white'
       onVisibleChange={(visible) => {
         dispatch(set(visible))
       }}

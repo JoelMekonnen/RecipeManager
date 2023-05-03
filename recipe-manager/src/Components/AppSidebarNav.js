@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
+
 import { CBadge } from '@coreui/react'
 
 export const AppSidebarNav = ({ items }) => {
@@ -10,7 +11,7 @@ export const AppSidebarNav = ({ items }) => {
     return (
       <>
         {icon && icon}
-        {name && name}
+        <span style={{ fontFamily:"montserrat", fontWeight:"bold" }} className='!tw-text-white'>{name && name}</span>
         {badge && (
           <CBadge color={badge.color} className="ms-auto">
             {badge.text}
@@ -30,6 +31,7 @@ export const AppSidebarNav = ({ items }) => {
             component: NavLink,
           })}
         key={index}
+        className="!tw-text-black"
         {...rest}
       >
         {navLink(name, icon, badge)}
