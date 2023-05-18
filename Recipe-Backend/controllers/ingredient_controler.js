@@ -14,11 +14,12 @@ const getCompanyid = async (userID) => {
 }
 // create Ingredients
 const createIngredient = async (req, res) => {
+      var companyID = await getCompanyid(req.user._id)
       await ingredients.findOne({name: req.body.ingName}).then( async (ing) => {
              if(ing) {
                   return res.status(202).json({msg:"ingriedient already exist"})
              } else {
-                var companyID = await getCompanyid(req.user._id)
+              
                 // lets get the company id from the user
                 // console.log(userCompany)
             //     var imageLoc = "/ingImage/" + companyID.companyName + "/Ingredients/" + req.file.filename

@@ -6,6 +6,30 @@ const ingredientSchema = new Schema({
              type:String,
              required: true
         },
+        storeType: {
+            type:mongoose.ObjectId,
+            ref: 'storeType'
+        },
+        fullWeight: {
+          type: Number,
+          default: 0,
+        },
+        emptyWeight: {
+           type: Number,
+           default: 0
+        },
+        fullLiquidWeight: {
+          type: Number,
+          default: 0
+        },
+        volume: {
+          type: Number,
+          default: 0
+        },
+        ingredient: {
+            type: Boolean,
+            default: true
+        },
         unitPrice: {
              type: Number,
              required: true
@@ -13,18 +37,6 @@ const ingredientSchema = new Schema({
         unit: {
             type: mongoose.ObjectId,
             ref:'baseUnitsModel'  
-        },
-        image: {
-             type:String,
-             required:false
-        },
-        imageLocation: {
-             type:String,
-             required:false
-        },
-        storeType: {
-            type: mongoose.ObjectId,
-            ref: 'storeType'
         },
         companyId: {
             type: mongoose.ObjectId,

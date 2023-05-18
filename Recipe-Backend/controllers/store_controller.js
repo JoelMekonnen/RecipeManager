@@ -27,7 +27,6 @@ const createStoreTypes = async (req, res) => {
 
               return res.status(301).json({'msg':'store type exists already'})
            } else {
-            
              storeTypeModel.create({
                    storeType: storeType,
                    description: storeDescription,

@@ -16,7 +16,7 @@ const createRecipe = async (req, res) => {
     
      // we are going to create the recipe
      // first get all the required field
-     let { name, ingList, procedure, price, categoryID} = req.body
+     let { name, ingList, procedure, price, categoryID, departmentID} = req.body
 
     // fetch the user id
     let user_id = req.user._id
@@ -30,7 +30,8 @@ const createRecipe = async (req, res) => {
          companyID:fetchCompany._id,
          totalPrice:price,
          procedure:procedure,
-         categoryID:categoryID
+         categoryID:categoryID,
+         departmentID:departmentID
     }).then((result) => {
           return res.status(200).json({msg:result})
     }).catch((e) => {

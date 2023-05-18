@@ -55,3 +55,4 @@ const StoreSchema = new Schema({
 const storeTypeModel = mongoose.model('storeType', StoreType)
 const storeModel = mongoose.model('storeModel', StoreSchema)
 module.exports = { storeTypeModel: storeTypeModel, storeModel: storeModel }
+
