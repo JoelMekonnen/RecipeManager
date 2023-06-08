@@ -61,6 +61,11 @@ const _nav = [
           },
           {
             component: CNavItem,
+            name: "Departments",
+            to: '/Admin/Department' 
+          },
+          {
+            component: CNavItem,
             name: 'Menu Generator',
             to:'#',
           },

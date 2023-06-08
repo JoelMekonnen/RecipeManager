@@ -1,5 +1,6 @@
 const express = require('express')
 const department = require('../models/departmentModel')
+const company = require('../models/companyModel')
 
 // lets first create a new ingredient
 const getCompanyid = async (userID) => {
@@ -73,3 +74,5 @@ const listAllDepartment = async (req, res) => {
          console.log(err)
      }
 }
+
+module.exports = { listAllDepartment, getDepartmentById, updateDepartment, createDepartment }

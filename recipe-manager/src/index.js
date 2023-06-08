@@ -15,6 +15,7 @@ import ListIngredient from './Pages/Admin/ListIngredient';
 import CreateIngredient from './Pages/Admin/CreateIngredient';
 import UpdateIngredient from './Pages/Admin/UpdateIngredient';
 import RecipesDetailPage from './Pages/Admin/RecipeDetail';
+import Department from './Pages/Admin/Department';
 import  { BrowserRouter, Routes, Route, Router} from "react-router-dom";
 import { Provider } from 'react-redux'
 import store from './store'
@@ -35,6 +36,7 @@ export default function RecipeManager() {
                         <Route path="/Admin/Recipe/List" element={ <ListRecipesPage/>}/>
                         <Route path="/Admin/ingredient/List" element={<ListIngredient/>}/>
                         <Route path="/Admin/Recipe/:id/Detail" element={<RecipesDetailPage/>}/>
+                        <Route path="/Admin/Department/" element={<Department/>}/>
                         {/* <Route path="/Admin/ingredient/:id/update" element={<UpdateIngredient/>}/> */}
                      </Route>
                      <Route  path="/Admin/Company/Register" element={<CreateCompany/>}/>
